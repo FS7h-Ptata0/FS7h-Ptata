@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FS7h Ptata | بيع البطاطا الطازجة</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- الهيدر -->
+  <header class="main-header">
+    <div class="container header-flex">
+      <div class="logo-box">
+        <a href="index.html">
+          <img src="https://cdn.discordapp.com/attachments/1326330428067545230/1362387727420493958/Snapchat-1037526106.jpg" alt="FS7h Ptata Logo" class="logo-img" />
+        </a>
+      </div>
+      <nav class="main-nav">
+        <a href="#about">حولنا</a>
+        <a href="#products">المنتجات</a>
+        <a href="#contact">تواصل معنا</a>
+      </nav>
+      <!-- سلة المشتريات -->
+      <div class="cart-box">
+        <button id="cartBtn">
+          <i class="fas fa-shopping-cart"></i>
+          <span id="cartCount">0</span> 
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- المنتجات -->
+  <section id="products" data-aos="fade-up">
+    <div class="container">
+      <h2>منتجاتنا</h2>
+      <div class="product-cards">
+        <!-- بطاقة منتج 1 -->
+        <div class="product-card">
+          <img src="https://www.publicdomainpictures.net/pictures/20000/velka/potatoes-1385739705Ty7.jpg" alt="بطاطا عادية">
+          <h3>بطاطا عادية</h3>
+          <p>بطاطا طازجة وذات جودة عالية.</p>
+          <p>السعر: 10 ريال / كجم</p>
+          <button class="btn add-to-cart" data-product="بطاطا عادية" data-price="10">أضف إلى السلة</button>
+        </div>
+        <!-- بطاقة منتج 2 -->
+        <div class="product-card">
+          <img src="https://cdn.pixabay.com/photo/2016/12/22/00/44/fries-1914771_960_720.jpg" alt="بطاطا مقلية">
+          <h3>بطاطا مقلية</h3>
+          <p>بطاطا مقلية جاهزة للأكل، لذيذة وشهية.</p>
+          <p>السعر: 15 ريال / كجم</p>
+          <button class="btn add-to-cart" data-product="بطاطا مقلية" data-price="15">أضف إلى السلة</button>
+        </div>
+        <!-- بطاقة منتج 3 -->
+        <div class="product-card">
+          <img src="https://cdn.pixabay.com/photo/2021/07/12/14/12/potatoes-6406075_960_720.jpg" alt="بطاطا بيورية">
+          <h3>بطاطا بيورية</h3>
+          <p>بطاطا بيورية لذيذة وسهلة التحضير.</p>
+          <p>السعر: 12 ريال / كجم</p>
+          <button class="btn add-to-cart" data-product="بطاطا بيورية" data-price="12">أضف إلى السلة</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- سلة المشتريات -->
+  <div id="cartModal" class="cart-modal">
+    <div class="cart-content">
+      <h2>السلة</h2>
+      <ul id="cartItems"></ul>
+      <p id="totalPrice">الإجمالي: 0 ريال</p>
+      <button id="closeCartBtn" class="btn">إغلاق</button>
+      <button id="clearCartBtn" class="btn">مسح السلة</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+
+    // بيانات السلة
+    let cart = [];
+
+    // إضافة المنتجات إلى السلة
+    const addToCartBtns = document.querySelectorAll('.add-to-cart');
+    addToCartBtns.forEach(button => {
+      button.addEventListener('click', (e) => {
+        const product = e.target.dataset.product;
+        const price = parseFloat(e.target.dataset.price);
+        addToCart(product, price);
+        displayNotification(`${product} أضيفت إلى السلة!`);
+      });
+    });
+
+    // إضافة منتج للسلة
+    function addToCart(product, price) {
+      const existingProduct = cart.find(item => item.product === product);
+      if (existingProduct) {
+        existingProduct.quantity += 1; // تعديل الكمية إذا كان المنتج موجود
+      } else {
+        cart.push({ product, price, quantity: 1 }); // إضافة منتج جديد
+      }
+      updateCart();
+    }
+
+    // تحديث السلة
+    function updateCart() {
+      const cartCount = document.getElementById('cartCount');
+      const cartItems = document.getElementById('cartItems');
+      const totalPrice = document.getElementById('totalPrice');
+      
+      // تحديث عدد المنتجات في السلة
+      cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+
+      // تحديث محتوى السلة
+      cartItems.innerHTML = '';
+      let total = 0;
+      cart.forEach(item => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          ${item.product} - ${item.price} ريال × ${item.quantity} 
+          <button class="remove-item" data-product="${item.product}">حذف</button>
+        `;
+        cartItems.appendChild(li);
+        total += item.price * item.quantity;
+      });
+
+      // تحديث إجمالي السعر
+      totalPrice.textContent = `الإجمالي: ${total} ريال`;
+    }
+
+    // حذف منتج من السلة
+    document.getElementById('cartItems').addEventListener('click', (e) => {
+      if (e.target.classList.contains('remove-item')) {
+        const productToRemove = e.target.dataset.product;
+        cart = cart.filter(item => item.product !== productToRemove);
+        updateCart();
+      }
+    });
+
+    // إظهار السلة
+    document.getElementById('cartBtn').addEventListener('click', () => {
+      document.getElementById('cartModal').style.display = 'block';
+    });
+
+    // إغلاق السلة
+    document.getElementById('closeCartBtn').addEventListener('click', () => {
+      document.getElementById('cartModal').style.display = 'none';
+    });
+
+    // مسح السلة
+    document.getElementById('clearCartBtn').addEventListener('click', () => {
+      cart = [];
+      updateCart();
+      document.getElementById('cartModal').style.display = 'none';
+    });
+
+    // عرض إشعار
+    function displayNotification(message) {
+      const notification = document.createElement('div');
+      notification.classList.add('notification');
+      notification.textContent = message;
+      document.body.appendChild(notification);
+      setTimeout(() => notification.remove(), 3000);
+    }
+  </script>
+
+</body>
+</html>
