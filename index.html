@@ -3,213 +3,356 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FS7h Ptata | متجر البطاطا</title>
+  <title>FS7h Ptata - متجر البطاطا الأفضل</title>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
+    /* إعدادات الصفحة */
     body {
-      margin: 0;
       font-family: 'Tajawal', sans-serif;
-      background-color: #fdfaf5;
-      color: #333;
+      margin: 0;
+      padding: 0;
+      background-color: #ecf0f1;
+      transition: background-color 0.3s ease;
     }
+
+    /* الشريط العلوي */
     header {
-      background-color: #d35400;
+      background-color: #2980b9;
       color: white;
       padding: 20px;
       text-align: center;
+      font-size: 24px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
-    .cart-icon {
+
+    /* الشريط العلوي المتحرك */
+    .nav-bar {
+      background-color: #2c3e50;
       position: fixed;
-      top: 15px;
-      left: 15px;
-      background-color: #27ae60;
-      color: white;
-      border-radius: 50%;
-      padding: 10px;
+      top: 0;
+      width: 100%;
+      padding: 10px 0;
+      text-align: center;
       z-index: 1000;
-      cursor: pointer;
-      transition: transform 0.3s, background-color 0.3s;
+      transition: background-color 0.5s;
     }
-    .cart-icon:hover {
-      transform: scale(1.1);
-      background-color: #2ecc71;
+
+    .nav-bar a {
+      color: white;
+      font-size: 18px;
+      margin: 0 15px;
+      text-decoration: none;
+      padding: 8px 15px;
+      display: inline-block;
+      transition: background-color 0.3s ease;
     }
-    .cart-icon span {
-      background: white;
-      color: #27ae60;
-      font-size: 12px;
-      padding: 3px 6px;
-      border-radius: 50%;
-      margin-right: 5px;
+
+    .nav-bar a:hover {
+      background-color: #34495e;
     }
+
+    /* المؤثرات على الصور */
     .hero {
-      background-image: url('https://cdn.discordapp.com/attachments/1326330428067545230/1362387727420493958/Snapchat-1037526106.jpg?ex=680235f2&is=6800e472&hm=267672de3c7418e65a6892d91bc30f3fda1ba9a49513ca502dbc2bbcaad50e0e');
+      background-image: url('https://cdn.discordapp.com/attachments/1326330428067545230/1362387727420493958/Snapchat-1037526106.jpg?ex=68038772&is=680235f2&hm=732d35d6e126203ffe90ff4bab469397859fb1179cd9ab6cdf76ec9e50bf4970&');
       background-size: cover;
       background-position: center;
-      padding: 100px 20px;
-      text-align: center;
+      padding: 120px 0;
       color: white;
-      text-shadow: 1px 1px 5px #000;
+      text-align: center;
+      position: relative;
+      transition: opacity 0.5s ease;
     }
+
     .hero h2 {
       font-size: 36px;
-      margin-bottom: 15px;
-      transition: transform 0.3s ease;
+      text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.4);
+      animation: slideIn 1s ease-out;
     }
-    .hero h2:hover {
-      transform: scale(1.05);
+
+    .hero p {
+      font-size: 20px;
+      text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.3);
+      animation: fadeIn 2s ease-out;
     }
+
     .btn {
-      background-color: #e67e22;
+      background-color: #27ae60;
       border: none;
       color: white;
-      padding: 10px 20px;
-      margin-top: 10px;
-      border-radius: 6px;
+      padding: 15px 25px;
+      border-radius: 5px;
+      font-size: 18px;
       cursor: pointer;
       transition: background-color 0.3s, transform 0.3s;
     }
+
     .btn:hover {
-      background-color: #d35400;
-      transform: scale(1.1);
+      background-color: #1e7c4a;
+      transform: scale(1.05);
     }
-    section {
+
+    /* الأنماط الأساسية للأقسام */
+    .section {
       padding: 40px 20px;
+      text-align: center;
     }
+
+    .section h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #2980b9;
+      transition: color 0.5s ease;
+    }
+
+    /* قسم المنتجات */
     .product-grid {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 20px;
-      justify-content: center;
+      padding: 20px;
     }
+
     .product {
-      background: white;
-      width: 300px;
+      background-color: white;
       border-radius: 10px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
       overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
-      animation: fadeInUp 1s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+
     .product:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      transform: scale(1.05);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
     }
+
     .product img {
       width: 100%;
       height: 200px;
       object-fit: cover;
       transition: transform 0.3s ease;
     }
+
     .product img:hover {
-      transform: scale(1.05);
-    }
-    .product-content {
-      padding: 15px;
-      text-align: center;
-    }
-    .rating {
-      color: gold;
-      margin: 5px 0;
-    }
-    @keyframes fadeInUp {
-      0% {opacity: 0; transform: translateY(30px);}
-      100% {opacity: 1; transform: translateY(0);}
-    }
-    .social-icons a {
-      color: #555;
-      font-size: 24px;
-      margin: 0 10px;
-      transition: color 0.3s, transform 0.3s;
-    }
-    .social-icons a:hover {
-      color: #e67e22;
       transform: scale(1.1);
     }
-    .reviews-section {
-      margin-top: 60px;
+
+    .product-content {
+      padding: 20px;
     }
-    .review-item {
-      background-color: #fff;
-      border-radius: 8px;
-      padding: 15px;
-      margin-bottom: 15px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    .product h3 {
+      font-size: 22px;
+      color: #2980b9;
     }
-    .review-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    }
-    .review-item h4 {
-      color: #e67e22;
-      margin-bottom: 10px;
-    }
-    .review-item p {
+
+    .product p {
+      font-size: 18px;
       color: #555;
     }
-    .star-rating {
-      font-size: 20px;
-      color: gold;
-      cursor: pointer;
-    }
-    .star-rating i {
-      transition: color 0.3s ease;
-    }
-    .star-rating i:hover {
+
+    .rating {
+      margin: 10px 0;
       color: #f39c12;
     }
-    @media (max-width: 600px) {
-      .product-grid {
-        flex-direction: column;
-        align-items: center;
+
+    .cart-button {
+      background-color: #3498db;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .cart-button:hover {
+      background-color: #2980b9;
+    }
+
+    /* المؤثرات النصية */
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes slideIn {
+      0% { transform: translateY(-50px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    /* تفاعل المستخدم مع الشريط المنبثق */
+    .contact-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .contact-modal .modal-content {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      width: 400px;
+      text-align: center;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-modal .modal-content h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .contact-modal .modal-content textarea {
+      width: 100%;
+      height: 150px;
+      margin-bottom: 20px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      font-size: 16px;
+    }
+
+    .contact-modal .modal-content button {
+      padding: 10px 20px;
+      background-color: #2980b9;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .contact-modal .modal-content button:hover {
+      background-color: #1f6394;
+    }
+
+    /* تحسين استجابة الصفحة */
+    @media (max-width: 768px) {
+      .hero h2 {
+        font-size: 28px;
       }
-      .cart-icon {
-        left: auto;
-        right: 15px;
+
+      .hero p {
+        font-size: 18px;
       }
+
+      .section h2 {
+        font-size: 24px;
+      }
+    }
+
+    /* قسم المراجعات */
+    .review-card {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin: 10px 0;
+    }
+
+    .review-header {
+      font-size: 20px;
+      font-weight: bold;
+      color: #2980b9;
+    }
+
+    .review-body {
+      font-size: 16px;
+      color: #555;
+      margin-top: 10px;
+    }
+
+    /* أنماط للأيقونات الاجتماعية في الفوتر */
+    footer {
+      background-color: #2c3e50;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+      position: relative;
+    }
+
+    .social-icons a {
+      color: white;
+      font-size: 24px;
+      margin: 0 15px;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      color: #3498db;
+    }
+
+    .footer-logo {
+      font-size: 36px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .footer-logo span {
+      color: #27ae60;
+    }
+
+    /* زر العودة للأعلى */
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #3498db;
+      color: white;
+      padding: 15px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .back-to-top:hover {
+      background-color: #2980b9;
+      transform: scale(1.1);
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>FS7h Ptata | عالم البطاطا الطازجة 🥔</h1>
-  </header>
-
-  <div class="cart-icon" onclick="goToCart()">
-    <span id="cartCount">0</span>
-    <i class="fas fa-shopping-cart"></i>
+  <!-- الشريط العلوي -->
+  <div class="nav-bar">
+    <a href="#home">الرئيسية</a>
+    <a href="#products">المنتجات</a>
+    <a href="#reviews">المراجعات</a>
+    <a href="#contact">تواصل معنا</a>
   </div>
 
+  <!-- قسم البطل -->
   <section class="hero">
-    <h2>أفضل أنواع البطاطا في السوق 😍</h2>
-    <p>بطاطا طازجة، مقلية، وبيوريه - كلها هنا!</p>
-    <button class="btn" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'});">تصفح المنتجات</button>
+    <h2>أفضل تجربة لشراء البطاطا الطازجة!</h2>
+    <p>نحن نقدم لك أنواعًا مختلفة من البطاطا التي ستنال إعجابك بكل تأكيد.</p>
+    <button class="btn" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'});">اكتشف المنتجات</button>
   </section>
 
-  <section id="products">
-    <h2 style="text-align:center;">منتجاتنا</h2>
+  <!-- قسم المنتجات -->
+  <section id="products" class="section">
+    <h2>منتجاتنا الرائعة</h2>
     <div class="product-grid">
+      <!-- منتج البطاطا العادية -->
       <div class="product">
         <img src="https://www.publicdomainpictures.net/pictures/20000/velka/potatoes-1385739705Ty7.jpg" alt="بطاطا عادية">
         <div class="product-content">
           <h3>بطاطا عادية</h3>
-          <p>للطبخ والقلي</p>
+          <p>للطبخ والقلي.</p>
           <div class="rating">★★★★☆</div>
           <p><strong>10 ريال / كجم</strong></p>
-          <button class="btn" onclick="addToCart('بطاطا عادية', 10)">أضف إلى السلة</button>
-          <div class="star-rating">
-            <i class="fas fa-star" onclick="rateProduct(1, 'بطاطا عادية')"></i>
-            <i class="fas fa-star" onclick="rateProduct(2, 'بطاطا عادية')"></i>
-            <i class="fas fa-star" onclick="rateProduct(3, 'بطاطا عادية')"></i>
-            <i class="fas fa-star" onclick="rateProduct(4, 'بطاطا عادية')"></i>
-            <i class="fas fa-star" onclick="rateProduct(5, 'بطاطا عادية')"></i>
-          </div>
+          <button class="cart-button" onclick="addToCart('بطاطا عادية', 10)">أضف إلى السلة</button>
         </div>
       </div>
-
+      <!-- منتج البطاطا المقلية -->
       <div class="product">
         <img src="https://cdn.pixabay.com/photo/2016/12/22/00/44/fries-1914771_960_720.jpg" alt="بطاطا مقلية">
         <div class="product-content">
@@ -217,77 +360,104 @@
           <p>جاهزة للأكل!</p>
           <div class="rating">★★★★★</div>
           <p><strong>15 ريال / كجم</strong></p>
-          <button class="btn" onclick="addToCart('بطاطا مقلية', 15)">أضف إلى السلة</button>
-          <div class="star-rating">
-            <i class="fas fa-star" onclick="rateProduct(1, 'بطاطا مقلية')"></i>
-            <i class="fas fa-star" onclick="rateProduct(2, 'بطاطا مقلية')"></i>
-            <i class="fas fa-star" onclick="rateProduct(3, 'بطاطا مقلية')"></i>
-            <i class="fas fa-star" onclick="rateProduct(4, 'بطاطا مقلية')"></i>
-            <i class="fas fa-star" onclick="rateProduct(5, 'بطاطا مقلية')"></i>
-          </div>
+          <button class="cart-button" onclick="addToCart('بطاطا مقلية', 15)">أضف إلى السلة</button>
         </div>
       </div>
-
+      <!-- منتج البطاطا الحلوة -->
       <div class="product">
-        <img src="https://cdn.pixabay.com/photo/2021/07/12/14/12/potatoes-6406075_960_720.jpg" alt="بطاطا بيوريه">
+        <img src="https://cdn.pixabay.com/photo/2016/11/22/22/01/sweet-potato-1853362_960_720.jpg" alt="بطاطا حلوة">
         <div class="product-content">
-          <h3>بطاطا بيورية</h3>
-          <p>سهل التحضير ولذيذة!</p>
-          <div class="rating">★★★★☆</div>
+          <h3>بطاطا حلوة</h3>
+          <p>صحية ولذيذة.</p>
+          <div class="rating">★★★★★</div>
           <p><strong>12 ريال / كجم</strong></p>
-          <button class="btn" onclick="addToCart('بطاطا بيورية', 12)">أضف إلى السلة</button>
-          <div class="star-rating">
-            <i class="fas fa-star" onclick="rateProduct(1, 'بطاطا بيورية')"></i>
-            <i class="fas fa-star" onclick="rateProduct(2, 'بطاطا بيورية')"></i>
-            <i class="fas fa-star" onclick="rateProduct(3, 'بطاطا بيورية')"></i>
-            <i class="fas fa-star" onclick="rateProduct(4, 'بطاطا بيورية')"></i>
-            <i class="fas fa-star" onclick="rateProduct(5, 'بطاطا بيورية')"></i>
-          </div>
+          <button class="cart-button" onclick="addToCart('بطاطا حلوة', 12)">أضف إلى السلة</button>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="reviews" class="reviews-section">
-    <h2 style="text-align:center;">مراجعات العملاء</h2>
-    <div class="review-item">
-      <h4>أحمد</h4>
-      <p>بطاطا ممتازة! أحببت الجودة والطعم.</p>
+  <!-- قسم المراجعات -->
+  <section id="reviews" class="section">
+    <h2>آراء العملاء</h2>
+    <div class="review-card">
+      <div class="review-header">أحمد العلي</div>
+      <div class="rating">★★★★☆</div>
+      <div class="review-body">
+        "البطاطا المقلية لذيذة جدًا! أحببت المذاق. سأطلب مرة أخرى بالتأكيد."
+      </div>
     </div>
-    <div class="review-item">
-      <h4>مريم</h4>
-      <p>سريعة التحضير والطعم لذيذ جداً!</p>
+
+    <div class="review-card">
+      <div class="review-header">سمية القحطاني</div>
+      <div class="rating">★★★★★</div>
+      <div class="review-body">
+        "أفضل بطاطا جربتها، الطعم الطازج واللذيذ يعجبني كثيرًا. المرة القادمة سأجرب البطاطا الحلوة!"
+      </div>
     </div>
-    <h3>أكتب مراجعتك:</h3>
-    <textarea id="reviewText" placeholder="أكتب مراجعتك هنا..."></textarea>
-    <button class="btn">أرسل المراجعة</button>
+
+    <div class="review-card">
+      <div class="review-header">محمد صالح</div>
+      <div class="rating">★★★★☆</div>
+      <div class="review-body">
+        "البطاطا العادية رائعة، خصوصًا عند تحضيرها في الفرن. الطعم ممتاز!"
+      </div>
+    </div>
   </section>
 
+  <!-- قسم تواصل مع العملاء -->
+  <section id="contact">
+    <button onclick="openContactModal()" class="btn">اتصل بنا</button>
+  </section>
+
+  <!-- نافذة تواصل -->
+  <div class="contact-modal" id="contactModal">
+    <div class="modal-content">
+      <h2>اترك لنا رسالتك</h2>
+      <textarea placeholder="اكتب رسالتك هنا..."></textarea>
+      <button onclick="closeContactModal()">إرسال</button>
+      <button onclick="closeContactModal()">إغلاق</button>
+    </div>
+  </div>
+
+  <!-- زر العودة للأعلى -->
+  <div class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</div>
+
+  <!-- أسفل الصفحة -->
   <footer>
-    <div class="social-icons" style="text-align: center;">
+    <div class="footer-logo">FS7h <span>Ptata</span></div>
+    <p>© FS7h Ptata 2025 | جميع الحقوق محفوظة</p>
+    <div class="social-icons">
       <a href="#"><i class="fab fa-facebook-f"></i></a>
       <a href="#"><i class="fab fa-instagram"></i></a>
       <a href="#"><i class="fab fa-twitter"></i></a>
     </div>
-    <p style="text-align: center;">© FS7h Ptata 2025 | جميع الحقوق محفوظة</p>
   </footer>
 
   <script>
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    // تفعيل زر العودة للأعلى عند التمرير
+    window.onscroll = function() {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        document.getElementById("backToTop").style.display = "block";
+      } else {
+        document.getElementById("backToTop").style.display = "none";
+      }
+    };
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function openContactModal() {
+      document.getElementById('contactModal').style.display = 'flex';
+    }
+
+    function closeContactModal() {
+      document.getElementById('contactModal').style.display = 'none';
+    }
 
     function addToCart(product, price) {
-      cart.push({ product, price });
-      localStorage.setItem("cart", JSON.stringify(cart));
-      document.getElementById("cartCount").innerText = cart.length;
-      alert(`${product} تمت إضافته إلى السلة!`);
-    }
-
-    function goToCart() {
-      window.location.href = "cart.html";
-    }
-
-    function rateProduct(star, productName) {
-      alert(`لقد قمت بتقييم المنتج ${productName} بـ ${star} نجوم!`);
+      alert('تم إضافة ' + product + ' إلى السلة بسعر ' + price + ' ريال');
     }
   </script>
 
